@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import com.example.networktest.model.presentation.BookItem
 import com.example.networktest.model.presentation.BookResponse
+import com.example.networktest.model.presentation.ImageItem
 import com.example.networktest.model.presentation.VolumeItem
 import org.json.JSONArray
 import org.json.JSONObject
@@ -72,15 +73,15 @@ private fun convertToPresentationData(deSerialized: String): BookResponse{
         val volumeInfoJson = bookItemsJson.getJSONObject("volumeInfo")
         val title = volumeInfoJson.getString("title")
         val authors = volumeInfoJson.getJSONArray("authors")
-
+        val imageItemJson = volumeInfoJson.getJSONObject("imageItem")
         val authorsList = mutableListOf<String>()
         for(i in 0 until authors.length()){
             authorsList.add(authors.getString(i))
         }
 
-        val volumeItem = VolumeItem(title, authorsList) //crashes here
-        val bookItem = BookItem(volumeItem)
-        listOfBooks.add(bookItem)
+        //val volumeItem = VolumeItem(title, authorsList, imageItemJson) //crashes here
+        //val bookItem = BookItem(volumeItem)
+        //listOfBooks.add(bookItem)
     }
     return BookResponse(listOfBooks)
 }
